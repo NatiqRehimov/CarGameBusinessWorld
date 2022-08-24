@@ -111,7 +111,14 @@ public class GetCustomers : MonoBehaviour
     private void OnCustomersGetOrDeliverEventHandler(OnCustomersGetOrDeliverEvent eventDetails)
     {
         eventDetails.Customers.text = "" + customersCount;
-        eventDetails.Coins.text = "" + coinsCount;
+        if (eventDetails.Coins.text != "0" && coinsCount == 0)
+        {
+            coinsCount = int.Parse(eventDetails.Coins.text);
+        }
+        else
+        {
+            eventDetails.Coins.text = "" + coinsCount;
+        }
     }
     private void OnLoginCoinSetEventHandler(OnLoginCoinSetEvent eventDetails)
     {

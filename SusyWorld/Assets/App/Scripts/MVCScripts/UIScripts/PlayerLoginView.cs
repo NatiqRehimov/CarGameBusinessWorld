@@ -22,16 +22,25 @@ namespace DynamicBox.UIViews
 
 		[SerializeField] private Text coinsText;
 
+		private string coins;
         public void OnLoginButtonPressed()
 		{
 			if (playerNameInputField.text == "DynamicBox")
 			{
-				controller.OnLoginButtonPressed(playerNameInputField.text, "999999");
+				coins = "999999";
+				controller.OnLoginButtonPressed(playerNameInputField.text, coins);
 			}
 			else if (playerNameInputField.text != null && playerNameInputField.text.Length > 0)
 			{
-				controller.OnLoginButtonPressed(playerNameInputField.text, "10");
+				coins = "10";
+				controller.OnLoginButtonPressed(playerNameInputField.text, coins);
 			}
+			loginPanel.SetActive(false);
+
+			infoPanel.SetActive(true);
+
+			nameText.text = playerNameInputField.text;
+			coinsText.text = coins;
 		}
 
 		public void SetupPlayerData(PlayerData playerData)
