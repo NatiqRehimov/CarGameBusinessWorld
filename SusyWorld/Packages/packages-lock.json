@@ -130,16 +130,18 @@
       }
     },
     "net.dynamicbox.eventmanagement": {
-      "version": "file:C:/Users/natik/OneDrive/Документы/event-management-main",
+      "version": "https://github.com/mechaniqe/event-management.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "793bdc4f5045201f199924149bf4977d37673354"
     },
     "net.dynamicbox.savemanagement": {
-      "version": "file:C:/Users/natik/OneDrive/Документы/save-management-main",
+      "version": "https://github.com/mechaniqe/save-management.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "11651052f9ac341e7ed3d1853f03eeabfc008c01"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
