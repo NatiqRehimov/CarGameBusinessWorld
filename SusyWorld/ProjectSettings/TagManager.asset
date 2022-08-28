@@ -7,6 +7,7 @@ TagManager:
   - Customer
   - Station
   - PetrolStation
+  - MAST_Holder
   layers:
   - Default
   - TransparentFX
