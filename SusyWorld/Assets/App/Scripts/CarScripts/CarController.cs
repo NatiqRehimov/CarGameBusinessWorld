@@ -14,7 +14,7 @@ public class CarController : MonoBehaviour
     [SerializeField] private WheelCollider[] wheelsC;
     [SerializeField] private Transform[] wheelT;
     private float steeringAngle;
-    private float maxSteerAngle = 30;
+    private float maxSteerAngle = 60;
     private Vector2 inputs;
     public int speed;
 
