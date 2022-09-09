@@ -40,7 +40,7 @@ public class GetCustomers : MonoBehaviour
         {
             for(int i = 0; i < customersCount; i++)
             {
-                coinsCount += Random.Range(5, 30);
+                coinsCount += Random.Range(10, 30);
             }
             notPickedCustomers.notPickedCustomers = 3-customersCount;
             customersCount = 0;
@@ -67,9 +67,9 @@ public class GetCustomers : MonoBehaviour
     }
     private void OnRefuelEventHandler(OnRefuelEvent eventDetails)
     {
-        if(eventDetails.PetrolValue.value<eventDetails.PetrolValue.maxValue && (eventDetails.PetrolValue.maxValue - eventDetails.PetrolValue.value) < coinsCount)
+        if(eventDetails.PetrolValue.value<eventDetails.PetrolValue.maxValue && (eventDetails.PetrolValue.maxValue - eventDetails.PetrolValue.value) < coinsCount*10)
         {
-            coinsCount -= (int)(eventDetails.PetrolValue.maxValue - eventDetails.PetrolValue.value);
+            coinsCount -= ((int)(eventDetails.PetrolValue.maxValue - eventDetails.PetrolValue.value))/10;
             eventDetails.PetrolValue.value = eventDetails.PetrolValue.maxValue;
         }
         else if(eventDetails.PetrolValue.value == eventDetails.PetrolValue.maxValue)

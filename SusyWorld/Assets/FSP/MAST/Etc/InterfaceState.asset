@@ -15,9 +15,9 @@ MonoBehaviour:
   selectedInterfaceTab: 0
   gridExists: 1
   previousBuildToolIndex: -1
-  selectedBuildToolIndex: 0
-  selectedPrefabIndex: 35
-  prefabPath: Assets/App/Prefabs/AllPrefabs
+  selectedBuildToolIndex: -1
+  selectedPrefabIndex: -1
+  prefabPath: Assets/App/Models/OBJ/Prefabs
   selectedPrefabPaletteFolderIndex: 0
   prefabPaletteColumnCount: 3
   previousPaintToolIndex: -1
