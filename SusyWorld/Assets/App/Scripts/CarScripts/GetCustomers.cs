@@ -16,6 +16,7 @@ public class GetCustomers : MonoBehaviour
     public RandomGenerate notPickedCustomers;
     public int coinsCount;
     private bool petrol;
+    private int[] numberOfClone = new int[3];
     [SerializeField] private CarController speed;
     private void OnEnable()
     {
@@ -33,17 +34,40 @@ public class GetCustomers : MonoBehaviour
     {
         if (other.CompareTag("Customer")&&petrol)
         {
-            Destroy(other.gameObject);
-            customersCount++;
+            for (int i = 0; i < notPickedCustomers.availableM.Length; i++)
+            {
+                if (other.name[0] - 49 == i)
+                {
+                    notPickedCustomers.availableM[i] = 3;
+                    numberOfClone[i] = i;
+                    Destroy(other.gameObject);
+                    customersCount++;
+                } 
+            }
+            for (int i = 0; i < notPickedCustomers.stationsOrCustomers.Length; i++)
+            {
+                if (other.transform.position == notPickedCustomers.stationsOrCustomers[i].position)
+                {
+                    notPickedCustomers.stationPositionNumber = i;
+                }
+            }
+            
+
         }
+    
         else if (other.CompareTag("Station") && customersCount>0)
         {
-            for(int i = 0; i < customersCount; i++)
+            for (int i = 0; i < notPickedCustomers.stationsOrCustomers.Length; i++)
             {
-                coinsCount += Random.Range(10, 30);
+                if (other.transform.position == notPickedCustomers.stationsOrCustomers[i].position && other.name[0]-49 == numberOfClone[other.name[0]-49])
+                {
+                    notPickedCustomers.availableT[i] = true;
+                    notPickedCustomers.availableM[other.name[0] - 49] = 1;
+                    coinsCount += Random.Range(10, 30);
+                    customersCount --;
+                    Destroy(other.gameObject);
+                }
             }
-            notPickedCustomers.notPickedCustomers = 3-customersCount;
-            customersCount = 0;
         }
         else if (other.CompareTag("PetrolStation"))
         {

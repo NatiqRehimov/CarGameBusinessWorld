@@ -811,7 +811,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &853251273554925223
 BoxCollider:
@@ -865,7 +865,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6073427008284164630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 22, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 5638470486976892558}
@@ -963,5 +963,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2363c0e9cda8c2b47b80ccd2d528b9d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customer: {fileID: 6850379285998791978, guid: a1e9cb31d811f684dacf22aa52dfd17d, type: 3}
-  notPickedCustomers: 0
+  stationsOrCustomers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  customer:
+  - {fileID: 1174200164694747821, guid: e44def3e5be87784fa6f236f2294be32, type: 3}
+  - {fileID: 5076145908284952703, guid: 00924ffc0e18f0942982ebcc0e27e05b, type: 3}
+  - {fileID: 6850379285998791978, guid: a1e9cb31d811f684dacf22aa52dfd17d, type: 3}
+  station:
+  - {fileID: 3776527876066531044, guid: faab28d297b531842856805e965c6ce0, type: 3}
+  - {fileID: 291464139552268326, guid: 9235887b3586e0a418d8917acec19d7c, type: 3}
+  - {fileID: 130054615646400951, guid: 900a1b160bed92d468ac9d6c1eee89e1, type: 3}
+  availableT: 
+  availableM: 
+  customerPositionNumber: 0

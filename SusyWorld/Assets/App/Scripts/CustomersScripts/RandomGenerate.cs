@@ -1,23 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-    public class RandomGenerate : MonoBehaviour
-    {
-        [SerializeField] private GameObject customer;
-        public int notPickedCustomers;
+public class RandomGenerate : MonoBehaviour
+{
+    [SerializeField] public Transform[] stationsOrCustomers;
+    [SerializeField] private GameObject[] customer;
+    [SerializeField] private GameObject[] station;
+    public bool[] availableT;
+    public byte[] availableM;
+    public int customerPositionNumber;
+    public int stationPositionNumber;
 
-        private void Start()
+    private void Start()
+    {
+        availableM = new byte[customer.Length];
+        availableT = new bool[stationsOrCustomers.Length];
+        availableM = Enumerable.Repeat((byte)1, customer.Length).ToArray();
+        availableT = Enumerable.Repeat(true, stationsOrCustomers.Length).ToArray();
+    }
+    private void Update()
+    {
+        Generator();
+    }
+    private void Generator()
+    {
+        for (int i = 0; i < availableM.Length; i++)
         {
-            notPickedCustomers = 0;
-        }
-        private void Update()
-        {
-            if (notPickedCustomers < 3)
+            if (availableM[i] == 1)
             {
-                Instantiate(customer);
-                customer.transform.position = new Vector3(Random.Range(-20, 45), 1.3f, Random.Range(45, -20));
-                notPickedCustomers++;
+                customerPositionNumber = (int)Random.Range(0, stationsOrCustomers.Length);
+                if (availableT[customerPositionNumber])
+                {
+                    Instantiate(customer[i],
+                    stationsOrCustomers[customerPositionNumber].position,
+                    stationsOrCustomers[customerPositionNumber].rotation);
+                    availableT[customerPositionNumber] = false;
+                    availableM[i] = 2;
+                }
+            }
+            else if(availableM[i] == 3)
+            {
+                customerPositionNumber = (int)Random.Range(0, stationsOrCustomers.Length);
+                if (availableT[customerPositionNumber])
+                {
+                    Instantiate(station[i],
+                    stationsOrCustomers[customerPositionNumber].position,
+                    stationsOrCustomers[customerPositionNumber].rotation);
+                    availableT[customerPositionNumber] = false;
+                    availableT[stationPositionNumber] = true;
+                    availableM[i] = 2;
+                }
             }
         }
+
     }
+}
