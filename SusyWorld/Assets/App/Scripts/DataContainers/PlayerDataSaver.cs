@@ -1,4 +1,3 @@
-using DynamicBox.CoinsInScripts;
 using DynamicBox.DataContainer;
 using DynamicBox.EventManagement;
 using DynamicBox.SaveManagement;
@@ -32,7 +31,6 @@ public class PlayerDataSaver : MonoBehaviour
 			PlayerData playerData = saveManager.LoadFromFile<PlayerData>(containerName, null);
 
 			EventManager.Instance.Raise(new OnPlayerDataExistsEvent(playerData));
-			EventManager.Instance.Raise(new OnLoginCoinSetEvent(int.Parse(playerData.Coins)));
 		}
 	}
 

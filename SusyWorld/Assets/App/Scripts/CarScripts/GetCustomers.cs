@@ -7,11 +7,11 @@ using DynamicBox.EventManagement.Customers;
 using DynamicBox.EventManagement.Refuel;
 using DynamicBox.DataContainer;
 using DynamicBox.UIEvents;
-using DynamicBox.CoinsInScripts;
 using DynamicBox.FuelSpend;
 
 public class GetCustomers : MonoBehaviour
 {
+    [SerializeField] public GameObject Car;
     private int customersCount;
     public RandomGenerate notPickedCustomers;
     public int coinsCount;
@@ -20,15 +20,14 @@ public class GetCustomers : MonoBehaviour
     [SerializeField] private CarController speed;
     private void OnEnable()
     {
-        EventManager.Instance.AddListener<OnCustomersGetOrDeliverEvent>(OnCustomersGetOrDeliverEventHandler);
         EventManager.Instance.AddListener<OnSpendFuelEvent>(OnSpendFuelEventHandler);
-        EventManager.Instance.AddListener<OnLoginCoinSetEvent>(OnLoginCoinSetEventHandler);
+        EventManager.Instance.AddListener<OnPlayerDataExistsEvent>(OnPlayerDataExistsEventHandler);
     }
     private void OnDisable()
     {
         EventManager.Instance.RemoveListener<OnCustomersGetOrDeliverEvent>(OnCustomersGetOrDeliverEventHandler);
         EventManager.Instance.RemoveListener<OnSpendFuelEvent>(OnSpendFuelEventHandler);
-        EventManager.Instance.RemoveListener<OnLoginCoinSetEvent>(OnLoginCoinSetEventHandler);
+        EventManager.Instance.RemoveListener<OnPlayerDataExistsEvent>(OnPlayerDataExistsEventHandler);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -66,16 +65,19 @@ public class GetCustomers : MonoBehaviour
                     coinsCount += Random.Range(10, 30);
                     customersCount --;
                     Destroy(other.gameObject);
+                    EventManager.Instance.AddListener<OnCustomersGetOrDeliverEvent>(OnCustomersGetOrDeliverEventHandler);
                 }
             }
         }
         else if (other.CompareTag("PetrolStation"))
         {
             EventManager.Instance.AddListener<OnRefuelEvent>(OnRefuelEventHandler);
+            EventManager.Instance.AddListener<OnCustomersGetOrDeliverEvent>(OnCustomersGetOrDeliverEventHandler);
         }
         else
         {
             EventManager.Instance.RemoveListener<OnRefuelEvent>(OnRefuelEventHandler);
+            EventManager.Instance.AddListener<OnCustomersGetOrDeliverEvent>(OnCustomersGetOrDeliverEventHandler);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -144,9 +146,9 @@ public class GetCustomers : MonoBehaviour
             eventDetails.Coins.text = "" + coinsCount;
         }
     }
-    private void OnLoginCoinSetEventHandler(OnLoginCoinSetEvent eventDetails)
+    private void OnPlayerDataExistsEventHandler(OnPlayerDataExistsEvent eventDetails)
     {
-        coinsCount = eventDetails.coins;
+            int.TryParse(eventDetails.PlayerData.Coins, out coinsCount);
     }
 
 }

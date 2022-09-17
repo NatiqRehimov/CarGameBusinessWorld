@@ -756,7 +756,7 @@ Transform:
   - {fileID: 7479750586416328921}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 358.267, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6974341339480707833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,6 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d243eccd6c12fe243bdeb14abee5642c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Car: {fileID: 5638470486977385134}
   notPickedCustomers: {fileID: 914052607880286339}
   coinsCount: 0
   speed: {fileID: 3892700431011731256}
@@ -978,3 +979,4 @@ MonoBehaviour:
   availableT: 
   availableM: 
   customerPositionNumber: 0
+  stationPositionNumber: 0

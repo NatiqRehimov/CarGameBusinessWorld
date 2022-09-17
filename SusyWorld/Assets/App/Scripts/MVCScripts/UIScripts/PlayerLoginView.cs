@@ -18,6 +18,8 @@ namespace DynamicBox.UIViews
 
 		[SerializeField] private GameObject infoPanel;
 
+		[SerializeField] private GameObject shopPanel;
+
 		[SerializeField] private Text nameText;
 
 		[SerializeField] private Text coinsText;
@@ -36,7 +38,7 @@ namespace DynamicBox.UIViews
 				controller.OnLoginButtonPressed(playerNameInputField.text, coins);
 			}
 			loginPanel.SetActive(false);
-
+			shopPanel.SetActive(false);
 			infoPanel.SetActive(true);
 
 			nameText.text = playerNameInputField.text;
@@ -46,11 +48,19 @@ namespace DynamicBox.UIViews
 		public void SetupPlayerData(PlayerData playerData)
 		{
 			loginPanel.SetActive(false);
-
+			shopPanel.SetActive(false);
 			infoPanel.SetActive(true);
 
 			nameText.text = playerData.Name;
 			coinsText.text = playerData.Coins;
 		}
-    }
+		public void OnShopOpen()
+		{
+			shopPanel.SetActive(true);
+		}
+		public void OnShopClosed()
+		{
+			shopPanel.SetActive(false);
+		}
+	}
 }

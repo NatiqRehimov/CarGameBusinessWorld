@@ -47,8 +47,8 @@ public class CarController : MonoBehaviour
     #region Car Control
     private void Accelerate()
     {
-        wheelsC[0].motorTorque = inputs.y * motorForce;
-        wheelsC[1].motorTorque = inputs.y * motorForce;
+        wheelsC[0].motorTorque = inputs.y * motorForce + 10;
+        wheelsC[1].motorTorque = inputs.y * motorForce + 10;
     }
     private void Steer()
     {
