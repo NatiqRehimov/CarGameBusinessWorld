@@ -8,6 +8,7 @@ TagManager:
   - Station
   - PetrolStation
   - MAST_Holder
+  - PaintShop
   layers:
   - Default
   - TransparentFX

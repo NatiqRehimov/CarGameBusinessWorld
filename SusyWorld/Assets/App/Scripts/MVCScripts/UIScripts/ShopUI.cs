@@ -17,12 +17,12 @@ public class ShopUI : MonoBehaviour
         {
             coins.coinsCount -= int.Parse(shopButton.GetComponentInChildren<Text>().text);
             shopButton.GetComponentInChildren<Text>().text = "";
-            shopButton.image.sprite = selectedButton;
             shopButton.GetComponent<Image>().color = new Color(1,1,1,1);
         }
         else if (shopButton.GetComponent<Image>().color == new Color(1, 1, 1, 1))
         {
             carModel.GetComponent<MeshRenderer>().material = shopButton.GetComponentInChildren<MeshRenderer>().material;
+            shopButton.image.sprite = selectedButton;
         }
     }
 }

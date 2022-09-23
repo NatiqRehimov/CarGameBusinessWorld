@@ -1,9 +1,11 @@
+using DynamicBox.EventManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DynamicBox.UIControllers;
 using UnityEngine.UI;
 using DynamicBox.DataContainer;
+using DynamicBox.CheckCar;
 using System;
 
 namespace DynamicBox.UIViews
@@ -25,6 +27,24 @@ namespace DynamicBox.UIViews
 		[SerializeField] private Text coinsText;
 
 		private string coins;
+		private bool inShop;
+        private void OnEnable()
+        {
+			EventManager.Instance.AddListener<CarInTunningPlaceEvent>(CarInTunningPlaceEventHandler);
+        }
+        private void OnDisable()
+		{
+			EventManager.Instance.RemoveListener<CarInTunningPlaceEvent>(CarInTunningPlaceEventHandler);
+		}
+		private void CarInTunningPlaceEventHandler(CarInTunningPlaceEvent eventDetails)
+		{
+			inShop = eventDetails.inShop;
+		}
+		private void Update()
+        {
+			shopPanel.SetActive(inShop);
+        }
+
         public void OnLoginButtonPressed()
 		{
 			if (playerNameInputField.text == "DynamicBox")
@@ -54,13 +74,9 @@ namespace DynamicBox.UIViews
 			nameText.text = playerData.Name;
 			coinsText.text = playerData.Coins;
 		}
-		public void OnShopOpen()
-		{
-			shopPanel.SetActive(true);
-		}
-		public void OnShopClosed()
-		{
-			shopPanel.SetActive(false);
-		}
+		public void OnShopClose()
+        {
+			inShop = false;
+        }
 	}
 }

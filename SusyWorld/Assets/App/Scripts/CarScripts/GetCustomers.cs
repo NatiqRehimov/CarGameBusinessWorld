@@ -8,16 +8,20 @@ using DynamicBox.EventManagement.Refuel;
 using DynamicBox.DataContainer;
 using DynamicBox.UIEvents;
 using DynamicBox.FuelSpend;
+using DynamicBox.CheckCar;
 
 public class GetCustomers : MonoBehaviour
 {
     [SerializeField] public GameObject Car;
+    [SerializeField] private AudioSource carDoorSlamSource;
+    [SerializeField] private AudioClip[] carDoorSlamClip;
     private int customersCount;
     public RandomGenerate notPickedCustomers;
     public int coinsCount;
     private bool petrol;
     private int[] numberOfClone = new int[3];
     [SerializeField] private CarController speed;
+    private bool inShop;
     private void OnEnable()
     {
         EventManager.Instance.AddListener<OnSpendFuelEvent>(OnSpendFuelEventHandler);
@@ -41,6 +45,7 @@ public class GetCustomers : MonoBehaviour
                     numberOfClone[i] = i;
                     Destroy(other.gameObject);
                     customersCount++;
+                    carDoorSlamSource.PlayOneShot(carDoorSlamClip[0],1);
                 } 
             }
             for (int i = 0; i < notPickedCustomers.stationsOrCustomers.Length; i++)
@@ -65,6 +70,7 @@ public class GetCustomers : MonoBehaviour
                     coinsCount += Random.Range(10, 30);
                     customersCount --;
                     Destroy(other.gameObject);
+                    carDoorSlamSource.PlayOneShot(carDoorSlamClip[1],1);
                     EventManager.Instance.AddListener<OnCustomersGetOrDeliverEvent>(OnCustomersGetOrDeliverEventHandler);
                 }
             }
@@ -73,6 +79,11 @@ public class GetCustomers : MonoBehaviour
         {
             EventManager.Instance.AddListener<OnRefuelEvent>(OnRefuelEventHandler);
             EventManager.Instance.AddListener<OnCustomersGetOrDeliverEvent>(OnCustomersGetOrDeliverEventHandler);
+        }
+        else if (other.CompareTag("PaintShop"))
+        {
+            inShop = true;
+            EventManager.Instance.Raise(new CarInTunningPlaceEvent(inShop));
         }
         else
         {

@@ -13,6 +13,9 @@ public class CarController : MonoBehaviour
     [SerializeField] private float motorForce;
     [SerializeField] private WheelCollider[] wheelsC;
     [SerializeField] private Transform[] wheelT;
+    [SerializeField] private AudioSource carMotorSound;
+    [SerializeField] private AudioSource carOtherSounds;
+    [SerializeField] private AudioClip carOtherClips;
     private float steeringAngle;
     private float maxSteerAngle = 60;
     private Vector2 inputs;
@@ -34,6 +37,10 @@ public class CarController : MonoBehaviour
         Steer();
         Accelerate();
         UpdateWheelPoses(wheelsC, wheelT);
+    }
+    private void Update()
+    {
+        CarSounds();
     }
     #endregion
 
@@ -67,6 +74,21 @@ public class CarController : MonoBehaviour
 
             _points[i].position = _pos;
             _points[i].rotation = _quat;
+        }
+    }
+    private void CarSounds()
+    {
+        if(speed > 0)
+        {
+            carMotorSound.volume = speed*0.005f;
+        }
+        else
+        {
+            carMotorSound.volume = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            carOtherSounds.PlayOneShot(carOtherClips,1);
         }
     }
     #endregion
