@@ -899,10 +899,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Car: {fileID: 5638470486977385134}
-  carDoorSlamSource: {fileID: 192496709496444563}
-  carDoorSlamClip:
+  carSoundSource: {fileID: 192496709496444563}
+  carSoundClips:
   - {fileID: 8300000, guid: 064352a85fcbf484f8865d838f753994, type: 3}
   - {fileID: 8300000, guid: 982ef266711e1d145963791bbe8fb709, type: 3}
+  - {fileID: 8300000, guid: e3de33fe3e81f6547a8e95b6176c6b7f, type: 3}
+  - {fileID: 8300000, guid: f93df831fa9289842a6ee7e8dec84f68, type: 3}
+  - {fileID: 8300000, guid: 190780d90de87a24eb8137f5202d2bf3, type: 3}
   notPickedCustomers: {fileID: 914052607880286339}
   coinsCount: 0
   speed: {fileID: 3892700431011731256}
@@ -974,8 +977,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7, y: 1, z: 5}
-  m_Center: {x: 0, y: 0, z: -1}
+  m_Size: {x: 3, y: 1, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6155789108655642373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9122152943065851948}
   m_LocalRotation: {x: -0.70710677, y: -9.3132235e-10, z: -9.3132235e-10, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 22.099998, z: 0}
+  m_LocalPosition: {x: 0, y: 22.2, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 5638470486976892558}

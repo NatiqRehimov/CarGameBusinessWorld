@@ -8,8 +8,9 @@ using UnityEngine.UI;
 public class ShopUI : MonoBehaviour
 {
     [SerializeField] private GameObject carModel;
-    [SerializeField] private Sprite selectedButton;
     [SerializeField] private GetCustomers coins;
+    [SerializeField] private AudioSource cashRegisterSource;
+    [SerializeField] private AudioClip cashRegisterSound;
     public void OnBuyButtonClicked(Button shopButton)
     {
         int i = 0;
@@ -17,12 +18,12 @@ public class ShopUI : MonoBehaviour
         {
             coins.coinsCount -= int.Parse(shopButton.GetComponentInChildren<Text>().text);
             shopButton.GetComponentInChildren<Text>().text = "";
-            shopButton.GetComponent<Image>().color = new Color(1,1,1,1);
+            shopButton.image.color = new Color(1,1,1,1);
+            cashRegisterSource.PlayOneShot(cashRegisterSound);
         }
-        else if (shopButton.GetComponent<Image>().color == new Color(1, 1, 1, 1))
+        else if (shopButton.image.color == new Color(1, 1, 1, 1))
         {
             carModel.GetComponent<MeshRenderer>().material = shopButton.GetComponentInChildren<MeshRenderer>().material;
-            shopButton.image.sprite = selectedButton;
         }
     }
 }

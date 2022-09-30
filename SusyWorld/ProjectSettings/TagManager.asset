@@ -9,6 +9,7 @@ TagManager:
   - PetrolStation
   - MAST_Holder
   - PaintShop
+  - Obstacle
   layers:
   - Default
   - TransparentFX

@@ -13,8 +13,8 @@ using DynamicBox.CheckCar;
 public class GetCustomers : MonoBehaviour
 {
     [SerializeField] public GameObject Car;
-    [SerializeField] private AudioSource carDoorSlamSource;
-    [SerializeField] private AudioClip[] carDoorSlamClip;
+    [SerializeField] private AudioSource carSoundSource;
+    [SerializeField] private AudioClip[] carSoundClips;
     private int customersCount;
     public RandomGenerate notPickedCustomers;
     public int coinsCount;
@@ -45,7 +45,7 @@ public class GetCustomers : MonoBehaviour
                     numberOfClone[i] = i;
                     Destroy(other.gameObject);
                     customersCount++;
-                    carDoorSlamSource.PlayOneShot(carDoorSlamClip[0],1);
+                    carSoundSource.PlayOneShot(carSoundClips[0],1);
                 } 
             }
             for (int i = 0; i < notPickedCustomers.stationsOrCustomers.Length; i++)
@@ -70,7 +70,8 @@ public class GetCustomers : MonoBehaviour
                     coinsCount += Random.Range(10, 30);
                     customersCount --;
                     Destroy(other.gameObject);
-                    carDoorSlamSource.PlayOneShot(carDoorSlamClip[1],1);
+                    carSoundSource.PlayOneShot(carSoundClips[1],1);
+                    carSoundSource.PlayOneShot(carSoundClips[3],1);
                     EventManager.Instance.AddListener<OnCustomersGetOrDeliverEvent>(OnCustomersGetOrDeliverEventHandler);
                 }
             }
@@ -84,6 +85,11 @@ public class GetCustomers : MonoBehaviour
         {
             inShop = true;
             EventManager.Instance.Raise(new CarInTunningPlaceEvent(inShop));
+        }
+        else if (other.CompareTag("Obstacle"))
+        {
+            if (speed.speed > 40)
+                carSoundSource.PlayOneShot(carSoundClips[2], speed.speed * 0.01f);
         }
         else
         {
@@ -108,6 +114,7 @@ public class GetCustomers : MonoBehaviour
         {
             coinsCount -= ((int)(eventDetails.PetrolValue.maxValue - eventDetails.PetrolValue.value))/10;
             eventDetails.PetrolValue.value = eventDetails.PetrolValue.maxValue;
+            carSoundSource.PlayOneShot(carSoundClips[4], 1);
         }
         else if(eventDetails.PetrolValue.value == eventDetails.PetrolValue.maxValue)
         {
